@@ -1,6 +1,7 @@
 from django.conf.urls import include, url
-from representation.views import auth
+from representation.views import auth, views
 
 urlpatterns = [
-    url(r'^auth/', auth.url_view()),
+    url(r'^$', views.index, name='index'),
+    url(r'^auth/', auth.url_view(), name='auth'),
 ]
