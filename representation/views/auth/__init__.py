@@ -19,13 +19,9 @@ def url_view():
 def _login(request):
     if request.method == 'GET':
         return render(request, 'representation/login.html')
-    username = request.POST['email']
+    username = request.POST['login']
     password = request.POST['password']
     user = authenticate(username=username, password=password)
-    if user is None:
-        _user = User.objects.get(email=username)
-        if _user is not None:
-            user = authenticate(username=_user.username, password=password)
     if user is not None:
         if user.is_active:
             login(request, user)
