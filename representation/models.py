@@ -14,3 +14,13 @@ class BankCard(models.Model):
 
     def __unicode__(self):
         return "%s - %s" % (self.bank_name, self.number)
+
+
+class Investor(models.Model):
+    surname = models.CharField(max_length=50, blank=False)
+    name = models.CharField(max_length=50, blank=False)
+    middle_name = models.CharField(max_length=50, blank=False)
+    total = models.FloatField(max_length=100, null=False)
+
+    def __unicode__(self):
+        return "%s - %s" % (self.surname, self.total)
