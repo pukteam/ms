@@ -32,7 +32,7 @@
                         <tbody>
                             {% for bank_card in bank_cards %}
                                 <tr>
-                                    <td>{{ bank_card.bank_name }}</td>
+                                    <td><a href="{% url 'representation:edit' bank_card.id %}">{{ bank_card.bank_name }}</a></td>
                                     <td>{{ bank_card.surname }}</td>
                                     <td>{{ bank_card.name }}</td>
                                     <td>{{ bank_card.middle_name }}</td>

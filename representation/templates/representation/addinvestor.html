@@ -5,9 +5,19 @@
 {% endblock %}
 
 {% block content %}
-    <form action="{% url 'representation:addinvestor' %}" method="post">
+    {% if form.instance.id%}
+        <form action="{% url 'representation:editinvestor' form.instance.id %}" method="post">
+    {% else %}
+        <form action="{% url 'representation:addinvestor' %}" method="post">
+    {% endif %}
+
         {% csrf_token %}
         {{ form.as_p }}
-        <input type="submit" value="Добавить">
+        {% if form.instance.id %}
+            <input type="submit" value="Сохранить">
+        {% else %}
+            <input type="submit" value="Добавить">
+        {% endif %}
+
     </form>
 {% endblock %}

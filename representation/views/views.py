@@ -29,6 +29,22 @@ def add_new_bank_card(request):
 
 
 @login_required(login_url=reverse_lazy('representation:auth:login'))
+def edit_bank_card(request, card_id):
+    _bank_card = BankCard.objects.get(id=card_id)
+    if request.method == 'GET':
+        return render(request, 'representation/addbankcard.html', {
+            'form': AddNewBankCard(instance=_bank_card)
+        })
+    elif request.method == 'POST':
+        f = AddNewBankCard(request.POST, instance=_bank_card)
+        if f.is_valid():
+            f.save()
+            return redirect(reverse('representation:index'))
+        else:
+            return redirect(reverse('representation:add'))
+
+
+@login_required(login_url=reverse_lazy('representation:auth:login'))
 def delete_bank_card(request):
     for item in request.POST:
         p = item.split("_", 1)
@@ -38,6 +54,7 @@ def delete_bank_card(request):
     return redirect(reverse('representation:index'))
 
 
+@login_required(login_url=reverse_lazy('representation:auth:login'))
 def investor(request):
     context = dict(investors=Investor.objects.all())
     return render(request, 'representation/investor.html', context)
@@ -51,6 +68,22 @@ def add_new_investor(request):
         })
     elif request.method == 'POST':
         f = AddNewInvestor(request.POST)
+        if f.is_valid():
+            f.save()
+            return redirect(reverse('representation:investor'))
+        else:
+            return redirect(reverse('representation:addinvenstor'))
+
+
+@login_required(login_url=reverse_lazy('representation:auth:login'))
+def edit_investor(request, investor_id):
+    _investor = Investor.objects.get(id=investor_id)
+    if request.method == 'GET':
+        return render(request, 'representation/addinvestor.html', {
+            'form': AddNewInvestor(instance=_investor)
+        })
+    elif request.method == 'POST':
+        f = AddNewInvestor(request.POST, instance=_investor)
         if f.is_valid():
             f.save()
             return redirect(reverse('representation:investor'))
