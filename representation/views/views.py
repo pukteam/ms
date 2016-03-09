@@ -25,7 +25,9 @@ def add_new_bank_card(request):
             f.save()
             return redirect(reverse('representation:index'))
         else:
-            return redirect(reverse('representation:add'))
+            return render(request, 'representation/addbankcard.html', {
+                'form': f
+            })
 
 
 @login_required(login_url=reverse_lazy('representation:auth:login'))
@@ -41,7 +43,9 @@ def edit_bank_card(request, card_id):
             f.save()
             return redirect(reverse('representation:index'))
         else:
-            return redirect(reverse('representation:add'))
+            return render(request, 'representation/addbankcard.html', {
+                'form': f
+            })
 
 
 @login_required(login_url=reverse_lazy('representation:auth:login'))
@@ -72,7 +76,9 @@ def add_new_investor(request):
             f.save()
             return redirect(reverse('representation:investor'))
         else:
-            return redirect(reverse('representation:addinvenstor'))
+            return render(request, 'representation/addinvestor.html', dict(
+                form=f
+            ))
 
 
 @login_required(login_url=reverse_lazy('representation:auth:login'))
@@ -88,7 +94,10 @@ def edit_investor(request, investor_id):
             f.save()
             return redirect(reverse('representation:investor'))
         else:
-            return redirect(reverse('representation:addinvenstor'))
+            return render(request, 'representation/addinvestor.html',
+                          dict(
+                              form=f
+                          ))
 
 
 @login_required(login_url=reverse_lazy('representation:auth:login'))
