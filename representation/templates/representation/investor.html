@@ -14,6 +14,10 @@
         </div>
 
         <div class="col-md-9 content">
+            <form method="get" style="margin-bottom: 10px">
+                <input name="search" type="text" style="width: 80%;" value="{{ search }}">
+                <input type="submit" value="поиск">
+            </form>
             <label>Процент: </label>
             <input type="text" name="percent">
             <button name="percentButton">Рассчитать</button>

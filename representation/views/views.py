@@ -8,8 +8,22 @@ from representation.forms import AddNewBankCard, AddNewInvestor
 
 @login_required(login_url=reverse_lazy('representation:auth:login'))
 def index(request):
-    bank_cards = BankCard.objects.all()
-    context = dict(bank_cards=bank_cards)
+    context = dict()
+    if 'search' in request.GET and request.GET['search'] is not "":
+        search = request.GET['search']
+        context['search'] = search
+        bank_cards = []
+        _bank_cards = []
+        for item in BankCard().__dict__:
+            if item not in ['_state', 'id']:
+                a = '%s__icontains' % item
+                _bank_cards.append(BankCard.objects.filter(**{a: search}))
+        for item in _bank_cards:
+            bank_cards += item
+        bank_cards = set(bank_cards)
+    else:
+        bank_cards = BankCard.objects.all()
+    context['bank_cards'] = bank_cards
     return render(request, 'representation/index.html', context)
 
 
@@ -60,7 +74,22 @@ def delete_bank_card(request):
 
 @login_required(login_url=reverse_lazy('representation:auth:login'))
 def investor(request):
-    context = dict(investors=Investor.objects.all())
+    context = dict()
+    if 'search' in request.GET and request.GET['search'] is not "":
+        search = request.GET['search']
+        context['search'] = search
+        investors = []
+        _investors = []
+        for item in Investor().__dict__:
+            if item not in ['_state', 'id']:
+                a = '%s__icontains' % item
+                _investors.append(Investor.objects.filter(**{a: search}))
+        for item in _investors:
+            investors += item
+        investors = set(investors)
+    else:
+        investors = Investor.objects.all()
+    context['investors'] = investors
     return render(request, 'representation/investor.html', context)
 
 
