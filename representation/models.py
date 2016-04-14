@@ -1,16 +1,21 @@
 # coding: utf-8
+from django.contrib.auth.models import User
 from django.db import models
 
 
 class BankCard(models.Model):
-    number = models.CharField(max_length=16, null=False, unique=True)
-    surname = models.CharField(max_length=50, blank=False)
-    name = models.CharField(max_length=50, blank=False)
-    middle_name = models.CharField(max_length=50, null=False)
-    balance = models.FloatField(max_length=100, null=False)
-    pin_code = models.CharField(max_length=4, null=False, blank=False)
-    availability = models.BooleanField(null=False, default=True)
-    bank_name = models.CharField(max_length=100, blank=False)
+    number = models.CharField(max_length=16, unique=True)
+    surname = models.CharField(max_length=50)
+    name = models.CharField(max_length=50)
+    middle_name = models.CharField(max_length=50)
+    balance = models.FloatField(max_length=100)
+    max_balance = models.FloatField(max_length=100)
+    pin_code = models.CharField(max_length=4)
+    availability = models.BooleanField(default=True)
+    bank_name = models.CharField(max_length=100)
+    date_joined = models.DateTimeField(auto_now=True)
+    user_access = models.ManyToManyField(User)
+    delete = models.BooleanField(default=False)
 
     def __unicode__(self):
         return "%s - %s" % (self.bank_name, self.number)
