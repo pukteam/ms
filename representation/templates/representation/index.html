@@ -9,7 +9,7 @@
         <div class="col-md-3 sidebar">
           <ul class="nav nav-pills nav-stacked">
             <li class="active"><a href="{% url 'representation:index' %}">Мои Карты</a></li>
-            <li><a href="{% url 'representation:add' %}">Добавить</a></li>
+            <li><a href="{% url 'representation:card:add' %}">Добавить</a></li>
           </ul>
         </div>
 
@@ -18,7 +18,7 @@
                 <input name="search" type="text" style="width: 80%;" value="{{ search }}">
                 <input type="submit" value="поиск">
             </form>
-            <form action="{% url 'representation:delete' %}" method="post">
+            <form action="{% url 'representation:card:delete' %}" method="post">
                 {% csrf_token %}
                 <table class="table table-hover" style="border-left: 1px solid #eee">
                     <thead>
@@ -36,7 +36,7 @@
                         <tbody>
                             {% for bank_card in bank_cards %}
                                 <tr>
-                                    <td><a href="{% url 'representation:edit' bank_card.id %}">{{ bank_card.bank_name }}</a></td>
+                                    <td><a href="{% url 'representation:card:edit' bank_card.id %}">{{ bank_card.bank_name }}</a></td>
                                     <td>{{ bank_card.surname }}</td>
                                     <td>{{ bank_card.name }}</td>
                                     <td>{{ bank_card.middle_name }}</td>
