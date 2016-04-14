@@ -6,6 +6,8 @@ from representation.models import BankCard, Investor
 from representation.forms import AddNewBankCard, AddNewInvestor
 
 
+# todo refactor
+
 @login_required(login_url=reverse_lazy('representation:auth:login'))
 def index(request):
     context = dict()
