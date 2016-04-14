@@ -1,3 +1,4 @@
 from django.contrib import admin
+from representation.models import BankCard
 
-# Register your models here.
+admin.site.register(BankCard)

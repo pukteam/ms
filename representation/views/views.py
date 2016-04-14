@@ -24,7 +24,7 @@ def index(request):
             bank_cards += item
         bank_cards = set(bank_cards)
     else:
-        bank_cards = BankCard.objects.all()
+        bank_cards = BankCard.objects.filter(was_deleted=False)
     context['bank_cards'] = bank_cards
     return render(request, 'representation/index.html', context)
 

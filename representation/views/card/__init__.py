@@ -1,6 +1,6 @@
 from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse_lazy, reverse
-from django.shortcuts import render, redirect
+from django.shortcuts import redirect
 from django.views.generic import CreateView, UpdateView
 
 from representation.models import BankCard
@@ -46,6 +46,7 @@ def delete_bank_card(request):
         p = item.split("_", 1)
         if len(p) != 2:
             continue
-        # todo must don't delete, edit field 'delete' in card model
-        BankCard.objects.get(id=p[1]).delete()
+        _card = BankCard.objects.get(id=p[1])
+        _card.was_deleted = True
+        _card.save(update_fields=['was_deleted'])
     return redirect(reverse('representation:index'))
