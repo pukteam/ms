@@ -83,14 +83,8 @@ class Investor(models.Model):
         return "%s - %s" % (self.surname, self.total)
 
 
-#
-# class Operation(models.Model):
-#     name = models.CharField(max_length=50)
-#
-
 class CardHistory(models.Model):
     card = models.ForeignKey('BankCard')
-    # user = models.ForeignKey(User)
     operation = models.CharField(choices=operation_type, max_length=2)
     balance_before = models.FloatField(max_length=100)
     balance_after = models.FloatField(max_length=100)
