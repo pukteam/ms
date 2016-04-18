@@ -1,5 +1,6 @@
 # coding: utf-8
 from django.contrib.auth.models import User
+from django.core.exceptions import ObjectDoesNotExist
 from django.db import models
 
 operation_type = (
@@ -7,32 +8,6 @@ operation_type = (
     ("R", "Refill"),
     ("O", "Other")
 )
-
-
-def write_down(card_id, sum):
-    card = BankCard.objects.get(id=card_id)
-    CardHistory(card=card, operation=0, balance_before=card.balance, balance_after=card.balance - sum).save()
-    card.balance -= sum
-    card.save()
-
-
-def refill(card_id, sum):
-    card = BankCard.objects.get(id=card_id)
-    CardHistory(card=card, operation=1, balance_before=card.balance, balance_after=card.balance + sum).save()
-    card.balance += sum
-    card.save()
-
-
-def money_transfer(from_card_id, to_card_id, sum):
-    from_card = BankCard.objects.get(id=from_card_id)
-    to_card = BankCard.objects.get(id=to_card_id)
-    CardHistory(card=from_card, operation=2, balance_before=from_card.balance,
-                balance_after=from_card.balance - sum).save()
-    CardHistory(card=from_card, operation=2, balance_before=to_card.balance, balance_after=to_card.balance - sum).save()
-    from_card.balance -= sum
-    to_card.balance += sum
-    from_card.save()
-    to_card.save()
 
 
 class BankCard(models.Model):
@@ -64,10 +39,11 @@ class BankCard(models.Model):
                         description += "%s was changed from %s to %s" % (item, card.__dict__[item], self.__dict__[item])
             CardHistory(card=card, operation="O", balance_before=card.balance, balance_after=self.balance,
                         description=description).save()
-        except:
+            super(BankCard, self).save()
+        except ObjectDoesNotExist:
+            super(BankCard, self).save()
             CardHistory(card=self, operation="O", balance_before=self.balance, balance_after=self.balance,
                         description="Card created").save()
-        super(BankCard, self).save()
 
     def __unicode__(self):
         return "%s - %s" % (self.bank_name, self.number)
