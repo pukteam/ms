@@ -6,7 +6,8 @@ from representation.models import BankCard
 class BankCardForm(ModelForm):
     class Meta:
         model = BankCard
-        fields = '__all__'
+        fields = ['number', 'surname', 'name', 'middle_name', 'bank_name', 'pin_code',
+                  'balance', 'max_balance', 'availability']
 
     def clean_number(self):
         data = self.cleaned_data['number']

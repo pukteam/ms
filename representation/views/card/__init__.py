@@ -34,7 +34,9 @@ class BankCardEditFormView(UpdateView):
     template_name = "representation/addbankcard.html"
 
     def get_object(self, queryset=None):
-        return self.model.objects.get(id=self.kwargs['card_id'])
+        model = self.model.objects.filter(id=self.kwargs['card_id'], was_deleted=False)
+        if model.first():
+            return model.first()
 
     def get_success_url(self):
         return reverse('representation:index')
