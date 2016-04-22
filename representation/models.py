@@ -15,8 +15,8 @@ class BankCard(models.Model):
     surname = models.CharField(max_length=50)
     name = models.CharField(max_length=50)
     middle_name = models.CharField(max_length=50)
-    balance = models.IntegerField(max_length=100)
-    max_balance = models.IntegerField(max_length=100, default=10000)
+    balance = models.IntegerField()
+    max_balance = models.IntegerField(default=10000)
     pin_code = models.CharField(max_length=4)
     availability = models.BooleanField(default=True)
     bank_name = models.CharField(max_length=100)
@@ -50,10 +50,10 @@ class BankCard(models.Model):
 
 
 class Investor(models.Model):
-    surname = models.CharField(max_length=50, blank=False)
-    name = models.CharField(max_length=50, blank=False)
-    middle_name = models.CharField(max_length=50, blank=False)
-    total = models.IntegerField(max_length=100, null=False)
+    surname = models.CharField(max_length=50)
+    name = models.CharField(max_length=50)
+    middle_name = models.CharField(max_length=50)
+    total = models.IntegerField()
 
     def __unicode__(self):
         return "%s - %s" % (self.surname, self.total)
@@ -62,7 +62,7 @@ class Investor(models.Model):
 class CardHistory(models.Model):
     card = models.ForeignKey('BankCard')
     operation = models.CharField(choices=operation_type, max_length=2)
-    balance_before = models.IntegerField(max_length=100)
-    balance_after = models.IntegerField(max_length=100)
+    balance_before = models.IntegerField()
+    balance_after = models.IntegerField()
     date_time = models.DateTimeField(auto_now_add=True)
     description = models.TextField(blank=True)
