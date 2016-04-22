@@ -47,6 +47,13 @@ class InvestorAddFormView(CreateView):
     form_class = InvestorForm
     template_name = 'representation/addinvestor.html'
 
+    def get(self, request, *args, **kwargs):
+        if request.user.is_superuser:
+            return super(InvestorAddFormView, self).get(request, *args, **kwargs)
+        else:
+            # todo return 403
+            return
+
     def get_success_url(self):
         return reverse('representation:investor:root')
 
