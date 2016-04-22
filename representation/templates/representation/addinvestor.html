@@ -6,9 +6,9 @@
 
 {% block content %}
     {% if form.instance.id%}
-        <form action="{% url 'representation:editinvestor' form.instance.id %}" method="post">
+        <form action="{% url 'representation:investor:edit' form.instance.id %}" method="post">
     {% else %}
-        <form action="{% url 'representation:addinvestor' %}" method="post">
+        <form action="{% url 'representation:investor:add' %}" method="post">
     {% endif %}
 
         {% csrf_token %}
