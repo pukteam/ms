@@ -5,6 +5,7 @@ from django.views.generic import CreateView, UpdateView
 
 from representation.models import BankCard
 from .forms import BankCardForm
+from representation.views.mixin import LoginRequiredMixin
 
 
 def url_view():
@@ -19,7 +20,7 @@ def url_view():
     return include(urlpatterns, namespace='card')
 
 
-class BankCardAddFormView(CreateView):
+class BaseBankCardView(LoginRequiredMixin):
     model = BankCard
     form_class = BankCardForm
     template_name = 'representation/addbankcard.html'
@@ -28,20 +29,17 @@ class BankCardAddFormView(CreateView):
         return reverse('representation:index')
 
 
-class BankCardEditFormView(UpdateView):
-    model = BankCard
-    form_class = BankCardForm
-    template_name = "representation/addbankcard.html"
+class BankCardAddFormView(BaseBankCardView, CreateView):
+    pass
 
+
+class BankCardEditFormView(BaseBankCardView, UpdateView):
     def get_object(self, queryset=None):
         model = self.model.objects.filter(id=self.kwargs['card_id'], was_deleted=False)
         if model.first():
             return model.first()
 
-    def get_success_url(self):
-        return reverse('representation:index')
-
-
+# todo check user is admin
 @login_required(login_url=reverse_lazy('representation:auth:login'))
 def delete_bank_card(request):
     for item in request.POST:
