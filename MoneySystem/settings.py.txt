@@ -50,6 +50,8 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.middleware.security.SecurityMiddleware',
+
+    'django.middleware.locale.LocaleMiddleware',
 )
 
 ROOT_URLCONF = 'MoneySystem.urls'
@@ -105,3 +107,15 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 STATICFILES_DIRS = ([os.path.join(BASE_DIR, "static")])
+
+
+ugettext = lambda s: s
+
+LANGUAGES = (
+    ('ru', ugettext(u'Russian')),
+    ('en', ugettext(u'English')),
+)
+
+LOCALE_PATHS = (
+    os.path.join(BASE_DIR, 'locale'),
+)
