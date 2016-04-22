@@ -48,7 +48,7 @@ class InvestorAddFormView(CreateView):
     template_name = 'representation/addinvestor.html'
 
     def get_success_url(self):
-        return reverse('representation:investor')
+        return reverse('representation:investor:root')
 
 
 class InvestorEditFormView(UpdateView):
@@ -62,7 +62,7 @@ class InvestorEditFormView(UpdateView):
             return model.first()
 
     def get_success_url(self):
-        return reverse('representation:investor')
+        return reverse('representation:investor:root')
 
 
 # todo refactor change function to class
@@ -73,4 +73,4 @@ def delete_investor(request):
         if len(p) != 2:
             continue
         Investor.objects.get(id=p[1]).delete()
-    return redirect(reverse('representation:investor'))
+    return redirect(reverse('representation:investor:root'))
