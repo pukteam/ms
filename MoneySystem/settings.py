@@ -82,8 +82,12 @@ WSGI_APPLICATION = 'MoneySystem.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'd6vdm61d91qfjc',
+        'USER': 'wmrzoruhhfzoyq',
+        'PASSWORD': 'wFs1NqF76_b8sLDgeABCsV0RVb',
+        'HOST': 'ec2-23-21-165-183.compute-1.amazonaws.com',  # Set to empty string for localhost.
+        'PORT': '5432',  # Set to empty string for default.
     }
 }
 
