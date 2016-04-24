@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/1.8/ref/settings/
 """
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
+from ast import literal_eval
 import os
 from django.utils.translation import ugettext
 
@@ -24,7 +25,9 @@ PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 SECRET_KEY = 'zjwslz((l79v(^22$ts=g4+)j^r$+uz0(uxs4ht4!g8ipfmz1s'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = bool(literal_eval(os.environ.get("MS_DEBUG", "True")))
+LOCAL = bool(literal_eval(os.environ.get("MS_LOCAL", "False")))
+PROD = bool(literal_eval(os.environ.get("MS_PROD", "False")))
 
 ALLOWED_HOSTS = []
 
@@ -80,17 +83,24 @@ WSGI_APPLICATION = 'MoneySystem.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/1.8/ref/settings/#databases
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'd6vdm61d91qfjc',
-        'USER': 'wmrzoruhhfzoyq',
-        'PASSWORD': 'wFs1NqF76_b8sLDgeABCsV0RVb',
-        'HOST': 'ec2-23-21-165-183.compute-1.amazonaws.com',  # Set to empty string for localhost.
-        'PORT': '5432',  # Set to empty string for default.
+if PROD and not LOCAL:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql_psycopg2',  # django.db.backends.postgresql_psycopg2
+            'NAME': os.environ["MS_DB_DEFAULT_NAME"],
+            'USER': os.environ["MS_DB_DEFAULT_USER"],
+            'PASSWORD': os.environ["MS_DB_DEFAULT_PASSWORD"],
+            'HOST': os.environ["MS_DB_DEFAULT_HOST"],
+            'PORT': os.environ["MS_DB_DEFAULT_PORT"],
+        }
     }
-}
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        }
+    }
 
 
 # Internationalization
@@ -121,7 +131,8 @@ STATICFILES_DIRS = (
 
 # Simplified static file serving.
 # https://warehouse.python.org/project/whitenoise/
-STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
+if PROD:
+    STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
 
 ugettext = lambda s: s
 

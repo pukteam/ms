@@ -1,6 +1,6 @@
 
 .idea/*
-*/settings.py
+/MoneySystem/settings.py
 
 /MoneySystem/staticfiles
 *.pyc
