@@ -4,7 +4,7 @@ from django.db.models import Sum
 from django.shortcuts import redirect, render
 from django.views.generic import CreateView, UpdateView, TemplateView
 
-from representation.models import BankCard
+from representation.models import BankCard, CardHistory
 from .forms import BankCardForm
 
 
@@ -35,6 +35,12 @@ class BankCardEditFormView(UpdateView):
     model = BankCard
     form_class = BankCardForm
     template_name = "representation/addbankcard.html"
+
+    def get_context_data(self, **kwargs):
+        context = super(BankCardEditFormView, self).get_context_data(**kwargs)
+
+        context["card_history"] = CardHistory.objects.filter(card_id=self.kwargs['card_id'])
+        return context
 
     def get_object(self, queryset=None):
         model = self.model.objects.filter(id=self.kwargs['card_id'], was_deleted=False)
