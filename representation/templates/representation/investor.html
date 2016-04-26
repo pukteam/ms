@@ -1,36 +1,37 @@
 {% extends 'representation/base.html' %}
+{% load i18n %}
 
 {% block title %}
-Вкладчики
+{% trans "Investors" %}
 {% endblock %}
 
 {% block content %}
     <div class="row">
         <div class="col-md-3 sidebar">
           <ul class="nav nav-pills nav-stacked">
-            <li class="active"><a href="{% url 'representation:investor' %}">Вкладчики</a></li>
-            <li><a href="{% url 'representation:addinvestor' %}">Добавить</a></li>
+            <li class="active"><a href="{% url 'representation:investor' %}">{% trans "Investors" %}</a></li>
+            <li><a href="{% url 'representation:addinvestor' %}">{% trans "Add" %}</a></li>
           </ul>
         </div>
 
         <div class="col-md-9 content">
             <form method="get" style="margin-bottom: 10px">
                 <input name="search" type="text" style="width: 80%;" value="{{ search }}">
-                <input type="submit" value="поиск">
+                <input type="submit" value="{% trans "Search" %}">
             </form>
-            <label>Процент: </label>
+            <label>{% trans "Percent" %}: </label>
             <input type="text" name="percent">
-            <button name="percentButton">Рассчитать</button>
+            <button name="percentButton">{% trans "Calculate" %}</button>
             <form action="{% url 'representation:deleteinvestor' %}" method="post">
                 {% csrf_token %}
                 <table class="table table-hover" style="border-left: 1px solid #eee">
                     <thead>
-                    <th>Фамилия</th>
-                    <th>Имя</th>
-                    <th>Отчество</th>
-                    <th>Сумма вклада</th>
-                    <th>Долг</th>
-                    <th>Удалить?</th>
+                    <th>{% trans "Last name" %}</th>
+                    <th>{% trans "First name" %}</th>
+                    <th>{% trans "Patronymic" %}</th>
+                    <th>{% trans "Deposit amount" %}</th>
+                    <th>{% trans "Debt" %}</th>
+                    <th>{% trans "Delete" %}?</th>
                     </thead>
 
                         <tbody>
