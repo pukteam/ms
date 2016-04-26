@@ -1,6 +1,5 @@
 
 .idea/*
-/MoneySystem/settings.py
 
 /MoneySystem/staticfiles
 *.pyc
@@ -69,3 +68,4 @@ target/
 
 #Ipython Notebook
 .ipynb_checkpoints
+MoneySystem/settings_local.py
