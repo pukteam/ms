@@ -97,3 +97,7 @@ def delete_investor(request):
             continue
         Investor.objects.get(id=p[1]).delete()
     return redirect(reverse('representation:investor'))
+
+
+def set_lang(request):
+    return render(request, 'representation/lang.html')

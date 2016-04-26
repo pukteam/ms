@@ -1,7 +1,8 @@
 {% extends 'representation/base.html' %}
+{% load i18n %}
 
 {% block title %}
-    Добавление карты
+    {% trans "Add bank card" %}
 {% endblock %}
 
 {% block content %}
@@ -14,9 +15,9 @@
         {% csrf_token %}
         {{ form.as_p }}
         {% if form.instance.id %}
-            <input type="submit" value="Сохранить">
+            <input type="submit" value="{% trans "Save" %}">
         {% else %}
-            <input type="submit" value="Добавить">
+            <input type="submit" value="{% trans "Add" %}">
         {% endif %}
 
     </form>
