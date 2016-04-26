@@ -43,6 +43,8 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
 
     'whitenoise',
+    'import_export',
+
     'representation',
 )
 
