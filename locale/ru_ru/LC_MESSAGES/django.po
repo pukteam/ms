@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-04-26 21:41+0300\n"
+"POT-Creation-Date: 2016-04-26 23:00+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,13 +17,11 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: .\MoneySystem\project_settings\django.py:123
-#: .\MoneySystem\settings_local.py:119
+#: .\MoneySystem\project_settings\django.py:109
 msgid "Russian"
 msgstr "Русский"
 
-#: .\MoneySystem\project_settings\django.py:124
-#: .\MoneySystem\settings_local.py:120
+#: .\MoneySystem\project_settings\django.py:110
 msgid "English"
 msgstr "Английский"
 

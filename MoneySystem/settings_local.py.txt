@@ -139,14 +139,3 @@ STATICFILES_DIRS = (
 # https://warehouse.python.org/project/whitenoise/
 if PROD:
     STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
-
-ugettext = lambda s: s
-
-LANGUAGES = (
-    ('ru', ugettext(u'Russian')),
-    ('en', ugettext(u'English')),
-)
-
-LOCALE_PATHS = (
-    os.path.join(BASE_DIR, 'locale'),
-)
