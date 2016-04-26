@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-04-22 16:53+0300\n"
+"POT-Creation-Date: 2016-04-26 20:42+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,13 +17,35 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: .\MoneySystem\settings.py:116
+#: .\MoneySystem\project_settings\django.py:123
+#: .\MoneySystem\settings_local.py:119
 msgid "Russian"
 msgstr "Русский"
 
-#: .\MoneySystem\settings.py:117
+#: .\MoneySystem\project_settings\django.py:124
+#: .\MoneySystem\settings_local.py:120
 msgid "English"
 msgstr "Английский"
+
+#: .\representation\templates\representation\addbankcard.html:5
+#: .\representation\templates\representation\index.html:13
+msgid "Add bank card"
+msgstr "Добавить банковскую карты"
+
+#: .\representation\templates\representation\addbankcard.html:18
+#: .\representation\templates\representation\addinvestor.html:18
+msgid "Save"
+msgstr ""
+
+#: .\representation\templates\representation\addbankcard.html:20
+#: .\representation\templates\representation\addinvestor.html:20
+#: .\representation\templates\representation\investor.html:13
+msgid "Add"
+msgstr ""
+
+#: .\representation\templates\representation\addinvestor.html:5
+msgid "Add investor"
+msgstr "Добавить инвестора"
 
 #: .\representation\templates\representation\base.html:30
 #: .\representation\templates\representation\index.html:12
@@ -31,6 +53,8 @@ msgid "Bank cards"
 msgstr "Банковские карты"
 
 #: .\representation\templates\representation\base.html:31
+#: .\representation\templates\representation\investor.html:5
+#: .\representation\templates\representation\investor.html:12
 msgid "Investors"
 msgstr "Инвесторы"
 
@@ -46,11 +70,8 @@ msgstr "Выход"
 msgid "Index page"
 msgstr "Главная страница"
 
-#: .\representation\templates\representation\index.html:13
-msgid "Add bank card"
-msgstr "Добавить банковскую карты"
-
 #: .\representation\templates\representation\index.html:20
+#: .\representation\templates\representation\investor.html:20
 msgid "Search"
 msgstr "Поиск"
 
@@ -99,5 +120,51 @@ msgid "Not available"
 msgstr "Не доступна"
 
 #: .\representation\templates\representation\index.html:59
+#: .\representation\templates\representation\investor.html:34
 msgid "Delete"
 msgstr "Удалить"
+
+#: .\representation\templates\representation\investor.html:22
+msgid "Percent"
+msgstr ""
+
+#: .\representation\templates\representation\investor.html:24
+msgid "Calculate"
+msgstr ""
+
+#: .\representation\templates\representation\investor.html:29
+#, fuzzy
+#| msgid "Last Name"
+msgid "Last name"
+msgstr "Фамилия"
+
+#: .\representation\templates\representation\investor.html:30
+#, fuzzy
+#| msgid "First Name"
+msgid "First name"
+msgstr "Имя"
+
+#: .\representation\templates\representation\investor.html:31
+msgid "Patronymic"
+msgstr ""
+
+#: .\representation\templates\representation\investor.html:32
+msgid "Deposit amount"
+msgstr ""
+
+#: .\representation\templates\representation\investor.html:33
+msgid "Debt"
+msgstr ""
+
+#: .\representation\templates\representation\login.html:5
+#: .\representation\templates\representation\login.html:12
+msgid "Login"
+msgstr ""
+
+#: .\representation\templates\representation\login.html:11
+msgid "Please sign in"
+msgstr ""
+
+#: .\representation\templates\representation\login.html:13
+msgid "Password"
+msgstr ""
