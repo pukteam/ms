@@ -1,0 +1,15 @@
+{% extends 'representation/base.html' %}
+{% load i18n %}
+
+{% block content %}
+    <div class="col-md-12">
+        <div class="col-md-6">
+            <h2>{% trans "Blocked cards total balance:" %}</h2>
+            <h3>{{ blocked_cards.balance__sum }}</h3>
+        </div>
+        <div class="col-md-6">
+            <h2>{% trans "Unblocked cards total balance:" %}</h2>
+            <h3>{{ unblocked_cards.balance__sum }}</h3>
+        </div>
+    </div>
+{% endblock %}

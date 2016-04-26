@@ -1,7 +1,8 @@
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required, user_passes_test
 from django.core.urlresolvers import reverse_lazy, reverse
-from django.shortcuts import redirect
-from django.views.generic import CreateView, UpdateView
+from django.db.models import Sum
+from django.shortcuts import redirect, render
+from django.views.generic import CreateView, UpdateView, TemplateView
 
 from representation.models import BankCard
 from .forms import BankCardForm
@@ -14,6 +15,8 @@ def url_view():
         url(r'^add/$', BankCardAddFormView.as_view(), name='add'),
         url(r'^edit/(?P<card_id>\d+)$', BankCardEditFormView.as_view(), name='edit'),
         url(r'^delete$', delete_bank_card, name='delete'),
+        url(r'^blocked$', BankCardBlocked.as_view(), name='blocked'),
+        url(r'^total_balance$', BankCardTotalBalance.as_view(), name='total_balance'),
     ]
 
     return include(urlpatterns, namespace='card')
@@ -52,3 +55,25 @@ def delete_bank_card(request):
         _card.was_deleted = True
         _card.save(update_fields=['was_deleted'])
     return redirect(reverse('representation:index'))
+
+
+# @user_passes_test(lambda u: u.is_superuser)
+class BankCardBlocked(TemplateView):
+    template_name = 'representation/blocked_cards.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(BankCardBlocked, self).get_context_data(**kwargs)
+
+        context["blocked_cards"] = BankCard.objects.filter(availability=False)
+        return context
+
+
+class BankCardTotalBalance(TemplateView):
+    template_name = 'representation/total_balance.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(BankCardTotalBalance, self).get_context_data(**kwargs)
+
+        context["blocked_cards"] = BankCard.objects.filter(availability=False).aggregate(Sum('balance'))
+        context["unblocked_cards"] = BankCard.objects.filter(availability=True).aggregate(Sum('balance'))
+        return context
