@@ -66,24 +66,12 @@ WSGI_APPLICATION = 'MoneySystem.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/1.8/ref/settings/#databases
-if PROD and not LOCAL:
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.postgresql_psycopg2',  # django.db.backends.postgresql_psycopg2
-            'NAME': os.environ["MS_DB_DEFAULT_NAME"],
-            'USER': os.environ["MS_DB_DEFAULT_USER"],
-            'PASSWORD': os.environ["MS_DB_DEFAULT_PASSWORD"],
-            'HOST': os.environ["MS_DB_DEFAULT_HOST"],
-            'PORT': os.environ["MS_DB_DEFAULT_PORT"],
-        }
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
-else:
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.sqlite3',
-            'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-        }
-    }
+}
 
 
 # Internationalization
@@ -114,8 +102,6 @@ STATICFILES_DIRS = (
 
 # Simplified static file serving.
 # https://warehouse.python.org/project/whitenoise/
-if PROD:
-    STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
 
 ugettext = lambda s: s
 
