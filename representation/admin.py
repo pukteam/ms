@@ -1,5 +1,19 @@
 from django.contrib import admin
-from representation.models import BankCard, CardHistory
+from import_export.admin import ExportMixin
+from representation.models import BankCard, CardHistory, Investor
 
-admin.site.register(BankCard)
+
+class BaseResource(ExportMixin, admin.ModelAdmin):
+    pass
+
+
+class BankCardResource(BaseResource):
+    pass
+
+
+class InvestorResource(BaseResource):
+    pass
+
+admin.site.register(BankCard, BankCardResource)
+admin.site.register(Investor, InvestorResource)
 admin.site.register(CardHistory)
