@@ -35,13 +35,13 @@ msgstr "Добавить банковскую карты"
 #: .\representation\templates\representation\addbankcard.html:18
 #: .\representation\templates\representation\addinvestor.html:18
 msgid "Save"
-msgstr ""
+msgstr "Сохранить"
 
 #: .\representation\templates\representation\addbankcard.html:20
 #: .\representation\templates\representation\addinvestor.html:20
 #: .\representation\templates\representation\investor.html:13
 msgid "Add"
-msgstr ""
+msgstr "Добавить"
 
 #: .\representation\templates\representation\addinvestor.html:5
 msgid "Add investor"
@@ -126,11 +126,11 @@ msgstr "Удалить"
 
 #: .\representation\templates\representation\investor.html:22
 msgid "Percent"
-msgstr ""
+msgstr "Процент"
 
 #: .\representation\templates\representation\investor.html:24
 msgid "Calculate"
-msgstr ""
+msgstr "Рассчитать"
 
 #: .\representation\templates\representation\investor.html:29
 #, fuzzy
@@ -144,27 +144,23 @@ msgstr "Фамилия"
 msgid "First name"
 msgstr "Имя"
 
-#: .\representation\templates\representation\investor.html:31
-msgid "Patronymic"
-msgstr ""
-
 #: .\representation\templates\representation\investor.html:32
 msgid "Deposit amount"
-msgstr ""
+msgstr "Сумма вклада"
 
 #: .\representation\templates\representation\investor.html:33
 msgid "Debt"
-msgstr ""
+msgstr "Долг"
 
 #: .\representation\templates\representation\login.html:5
 #: .\representation\templates\representation\login.html:12
 msgid "Login"
-msgstr ""
+msgstr "Вход"
 
 #: .\representation\templates\representation\login.html:11
 msgid "Please sign in"
-msgstr ""
+msgstr "Пожалуйста, войдите"
 
 #: .\representation\templates\representation\login.html:13
 msgid "Password"
-msgstr ""
+msgstr "Пароль"
