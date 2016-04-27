@@ -16,12 +16,12 @@
         <div class="col-md-9">
             <div class="col-md-12">
                 <div class="col-md-6">
-                    <h2>{% trans "Blocked cards total balance:" %}</h2>
-                    <h3>{{ blocked_cards.balance__sum }}</h3>
+                    <h4>{% trans "Blocked cards total balance:" %}</h4>
+                    <h5>∑ = {{ blocked_cards_balance }}</h5>
                 </div>
                 <div class="col-md-6">
-                    <h2>{% trans "Unblocked cards total balance:" %}</h2>
-                    <h3>{{ unblocked_cards.balance__sum }}</h3>
+                    <h4>{% trans "Unblocked cards total balance:" %}</h4>
+                    <h5>∑ = {{ unblocked_cards_balance }}</h5>
                 </div>
             </div>
         </div>
