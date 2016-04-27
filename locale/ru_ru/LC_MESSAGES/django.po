@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-04-27 14:41+0300\n"
+"POT-Creation-Date: 2016-04-27 21:04+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -26,19 +26,45 @@ msgid "English"
 msgstr "Английский"
 
 #: .\representation\templates\representation\addbankcard.html:5
+#: .\representation\templates\representation\blocked_cards.html:9
 #: .\representation\templates\representation\index.html:13
+#: .\representation\templates\representation\total_balance.html:9
 msgid "Add bank card"
 msgstr "Добавить банковскую карты"
 
-#: .\representation\templates\representation\addbankcard.html:18
+#: .\representation\templates\representation\addbankcard.html:17
 #: .\representation\templates\representation\addinvestor.html:18
 msgid "Save"
 msgstr "Сохранить"
 
-#: .\representation\templates\representation\addbankcard.html:20
+#: .\representation\templates\representation\addbankcard.html:19
 #: .\representation\templates\representation\addinvestor.html:20
 msgid "Add"
 msgstr "Добавить"
+
+#: .\representation\templates\representation\addbankcard.html:24
+msgid "Operation"
+msgstr "Операция"
+
+#: .\representation\templates\representation\addbankcard.html:25
+#, fuzzy
+#| msgid "Balance"
+msgid "Balance before"
+msgstr "Баланс"
+
+#: .\representation\templates\representation\addbankcard.html:26
+#, fuzzy
+#| msgid "Balance"
+msgid "Balance after"
+msgstr "Баланс"
+
+#: .\representation\templates\representation\addbankcard.html:27
+msgid "Operation time"
+msgstr "Время операции"
+
+#: .\representation\templates\representation\addbankcard.html:28
+msgid "Description"
+msgstr "Описание"
 
 #: .\representation\templates\representation\addinvestor.html:5
 #: .\representation\templates\representation\investor.html:13
@@ -46,7 +72,9 @@ msgid "Add investor"
 msgstr "Добавить инвестора"
 
 #: .\representation\templates\representation\base.html:30
+#: .\representation\templates\representation\blocked_cards.html:8
 #: .\representation\templates\representation\index.html:12
+#: .\representation\templates\representation\total_balance.html:8
 msgid "Bank cards"
 msgstr "Банковские карты"
 
@@ -64,65 +92,74 @@ msgstr "Язык"
 msgid "Logout"
 msgstr "Выход"
 
-#: .\representation\templates\representation\blocked_cards.html:5
+#: .\representation\templates\representation\blocked_cards.html:11
+#: .\representation\templates\representation\blocked_cards.html:17
+#: .\representation\templates\representation\index.html:14
+#: .\representation\templates\representation\total_balance.html:11
 msgid "Blocked cards"
 msgstr "Заблокированные банковские карты"
 
-#: .\representation\templates\representation\blocked_cards.html:8
-#: .\representation\templates\representation\index.html:26
+#: .\representation\templates\representation\blocked_cards.html:12
+#: .\representation\templates\representation\index.html:15
+#: .\representation\templates\representation\total_balance.html:12
+msgid "Cards total balance"
+msgstr "Общий баланс на картах"
+
+#: .\representation\templates\representation\blocked_cards.html:20
+#: .\representation\templates\representation\index.html:28
 msgid "Bank"
 msgstr "Банк"
 
-#: .\representation\templates\representation\blocked_cards.html:9
-#: .\representation\templates\representation\index.html:27
+#: .\representation\templates\representation\blocked_cards.html:21
+#: .\representation\templates\representation\index.html:29
 #: .\representation\templates\representation\investor.html:29
 msgid "Last name"
 msgstr "Фамилия"
 
-#: .\representation\templates\representation\blocked_cards.html:10
-#: .\representation\templates\representation\index.html:28
+#: .\representation\templates\representation\blocked_cards.html:22
+#: .\representation\templates\representation\index.html:30
 #: .\representation\templates\representation\investor.html:30
 msgid "First name"
 msgstr "Имя"
 
-#: .\representation\templates\representation\blocked_cards.html:11
-#: .\representation\templates\representation\index.html:29
+#: .\representation\templates\representation\blocked_cards.html:23
+#: .\representation\templates\representation\index.html:31
 #: .\representation\templates\representation\investor.html:31
 msgid "Middle name"
 msgstr "Отчество"
 
-#: .\representation\templates\representation\blocked_cards.html:12
-#: .\representation\templates\representation\index.html:30
+#: .\representation\templates\representation\blocked_cards.html:24
+#: .\representation\templates\representation\index.html:32
 msgid "Number of card"
 msgstr "Номер карты"
 
-#: .\representation\templates\representation\blocked_cards.html:13
-#: .\representation\templates\representation\index.html:31
+#: .\representation\templates\representation\blocked_cards.html:25
+#: .\representation\templates\representation\index.html:33
 msgid "PIN code"
 msgstr "PIN код"
 
-#: .\representation\templates\representation\blocked_cards.html:14
-#: .\representation\templates\representation\index.html:32
+#: .\representation\templates\representation\blocked_cards.html:26
+#: .\representation\templates\representation\index.html:34
 msgid "Balance"
 msgstr "Баланс"
 
-#: .\representation\templates\representation\blocked_cards.html:15
-#: .\representation\templates\representation\index.html:33
+#: .\representation\templates\representation\blocked_cards.html:27
+#: .\representation\templates\representation\index.html:35
 msgid "Availability"
 msgstr "Доступность"
 
-#: .\representation\templates\representation\blocked_cards.html:16
-#: .\representation\templates\representation\index.html:34
+#: .\representation\templates\representation\blocked_cards.html:28
+#: .\representation\templates\representation\index.html:36
 msgid "Delete?"
 msgstr "Удалить?"
 
-#: .\representation\templates\representation\blocked_cards.html:32
-#: .\representation\templates\representation\index.html:49
+#: .\representation\templates\representation\blocked_cards.html:44
+#: .\representation\templates\representation\index.html:53
 msgid "Available"
 msgstr "Доступна"
 
-#: .\representation\templates\representation\blocked_cards.html:34
-#: .\representation\templates\representation\index.html:51
+#: .\representation\templates\representation\blocked_cards.html:46
+#: .\representation\templates\representation\index.html:55
 msgid "Not available"
 msgstr "Не доступна"
 
@@ -130,12 +167,12 @@ msgstr "Не доступна"
 msgid "Index page"
 msgstr "Главная страница"
 
-#: .\representation\templates\representation\index.html:20
+#: .\representation\templates\representation\index.html:22
 #: .\representation\templates\representation\investor.html:20
 msgid "Search"
 msgstr "Поиск"
 
-#: .\representation\templates\representation\index.html:59
+#: .\representation\templates\representation\index.html:63
 #: .\representation\templates\representation\investor.html:34
 msgid "Delete"
 msgstr "Удалить"
@@ -169,10 +206,10 @@ msgstr "Пожалуйста, войдите"
 msgid "Password"
 msgstr "Пароль"
 
-#: .\representation\templates\representation\total_balance.html:7
+#: .\representation\templates\representation\total_balance.html:19
 msgid "Blocked cards total balance:"
 msgstr "Общий баланс на заблокированных картах"
 
-#: .\representation\templates\representation\total_balance.html:11
+#: .\representation\templates\representation\total_balance.html:23
 msgid "Unblocked cards total balance:"
 msgstr "Общий баланс на не заблокированных картах"
