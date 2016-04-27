@@ -100,16 +100,3 @@ STATICFILES_DIRS = (
     os.path.join(PROJECT_ROOT, '../static'),
 )
 
-# Simplified static file serving.
-# https://warehouse.python.org/project/whitenoise/
-
-ugettext = lambda s: s
-
-LANGUAGES = (
-    ('ru', ugettext(u'Russian')),
-    ('en', ugettext(u'English')),
-)
-
-LOCALE_PATHS = (
-    os.path.join(PROJECT_ROOT, '../../locale'),
-)
