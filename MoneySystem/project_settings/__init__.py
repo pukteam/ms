@@ -13,6 +13,3 @@ if PROD and not LOCAL:
         }
     }
     STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
-    LOCALE_PATHS = (
-        os.path.join(PROJECT_ROOT, 'locale'),
-    )
