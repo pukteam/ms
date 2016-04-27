@@ -13,8 +13,8 @@ def url_view():
 
     urlpatterns = [
         url(r'^add/$', BankCardAddFormView.as_view(), name='add'),
-        url(r'^edit/(?P<card_id>\d+)$', BankCardEditFormView.as_view(), name='edit'),
-        url(r'^delete$', delete_bank_card, name='delete'),
+        url(r'^edit/(?P<card_id>\d+)/$', BankCardEditFormView.as_view(), name='edit'),
+        url(r'^delete/$', delete_bank_card, name='delete'),
     ]
 
     return include(urlpatterns, namespace='card')
@@ -39,7 +39,7 @@ class BankCardEditFormView(BaseBankCardView, UpdateView):
         if model.first():
             return model.first()
 
-# todo check user is admin
+
 @login_required(login_url=reverse_lazy('representation:auth:login'))
 def delete_bank_card(request):
     for item in request.POST:

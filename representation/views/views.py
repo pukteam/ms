@@ -5,8 +5,6 @@ from django.shortcuts import render
 from representation.models import BankCard
 
 
-# todo refactor change function to class
-
 @login_required(login_url=reverse_lazy('representation:auth:login'))
 def index(request):
     context = dict()

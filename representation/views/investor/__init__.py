@@ -5,7 +5,7 @@ from django.views.generic import CreateView, UpdateView
 
 from representation.models import Investor
 from .forms import InvestorForm
-from representation.views.mixin import LoginRequiredMixin
+from representation.views.mixin import AdminRoleRequiredMixin
 
 
 def url_view():
@@ -21,7 +21,6 @@ def url_view():
     return include(urlpatterns, namespace='investor')
 
 
-# todo refactor change function to class
 @login_required(login_url=reverse_lazy('representation:auth:login'))
 def investor_all(request):
     context = dict()
@@ -43,19 +42,13 @@ def investor_all(request):
     return render(request, 'representation/investor.html', context)
 
 
-class BaseInvestorFormView(LoginRequiredMixin):
+class BaseInvestorFormView(AdminRoleRequiredMixin):
     model = Investor
     form_class = InvestorForm
     template_name = 'representation/addinvestor.html'
 
     def get_success_url(self):
         return reverse('representation:investor:root')
-
-    def get(self, request, *args, **kwargs):
-        if request.user.is_superuser:
-            return super(BaseInvestorFormView, self).get(request, *args, **kwargs)
-        else:
-            return redirect(reverse('representation:index'))
 
 
 class InvestorAddFormView(BaseInvestorFormView, CreateView):
@@ -69,13 +62,12 @@ class InvestorEditFormView(BaseInvestorFormView, UpdateView):
             return model.first()
 
 
-# todo refactor change function to class
-# todo check user is admin
 @login_required(login_url=reverse_lazy('representation:auth:login'))
 def delete_investor(request):
-    for item in request.POST:
-        p = item.split("_", 1)
-        if len(p) != 2:
-            continue
-        Investor.objects.get(id=p[1]).delete()
+    if request.user.is_superuser:
+        for item in request.POST:
+            p = item.split("_", 1)
+            if len(p) != 2:
+                continue
+            Investor.objects.get(id=p[1]).delete()
     return redirect(reverse('representation:investor:root'))
