@@ -11,9 +11,8 @@ class LoginRequiredMixin(object):
 
 
 class AdminRoleRequiredMixin(LoginRequiredMixin):
-    @classmethod
-    def get(cls, request, *args, **kwargs):
+    def get(self, request, *args, **kwargs):
         if request.user.is_superuser:
-            return super(AdminRoleRequiredMixin, cls).get(request, *args, **kwargs)
+            return super(AdminRoleRequiredMixin, self).get(request, *args, **kwargs)
         else:
             return redirect(reverse('representation:index'))
