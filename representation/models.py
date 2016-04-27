@@ -29,20 +29,23 @@ class BankCard(models.Model):
         try:
             card = BankCard.objects.get(id=self.id)
             if card.balance < self.balance:
-                CardHistory(card=card, operation="R", balance_before=card.balance, balance_after=self.balance).save()
+                CardHistory(card=card, operation="Refill", balance_before=card.balance,
+                            balance_after=self.balance).save()
             elif card.balance > self.balance:
-                CardHistory(card=card, operation="WD", balance_before=card.balance, balance_after=self.balance).save()
+                CardHistory(card=card, operation="Writing down", balance_before=card.balance,
+                            balance_after=self.balance).save()
             description = ""
             for item in BankCard().__dict__:
                 if item not in ['_state', 'id', 'balance']:
                     if card.__dict__[item] != self.__dict__[item]:
-                        description += "%s was changed from %s to %s" % (item, card.__dict__[item], self.__dict__[item])
-            CardHistory(card=card, operation="O", balance_before=card.balance, balance_after=self.balance,
-                        description=description).save()
+                        description += "-%s was changed from %s to %s " % (item, card.__dict__[item], self.__dict__[item])
+            if description != "":
+                CardHistory(card=card, operation="Other", balance_before=card.balance, balance_after=self.balance,
+                            description=description).save()
             super(BankCard, self).save()
         except ObjectDoesNotExist:
             super(BankCard, self).save()
-            CardHistory(card=self, operation="O", balance_before=self.balance, balance_after=self.balance,
+            CardHistory(card=self, operation="Other", balance_before=self.balance, balance_after=self.balance,
                         description="Card created").save()
 
     def __unicode__(self):
@@ -61,7 +64,7 @@ class Investor(models.Model):
 
 class CardHistory(models.Model):
     card = models.ForeignKey('BankCard')
-    operation = models.CharField(choices=operation_type, max_length=2)
+    operation = models.CharField(choices=operation_type, max_length=20)
     balance_before = models.IntegerField()
     balance_after = models.IntegerField()
     date_time = models.DateTimeField(auto_now_add=True)
