@@ -11,7 +11,6 @@
     {% else %}
         <form action="{% url 'representation:card:add' %}" method="post">
     {% endif %}
-
         {% csrf_token %}
         {{ form.as_p }}
         {% if form.instance.id %}
@@ -19,6 +18,25 @@
         {% else %}
             <input type="submit" value="{% trans "Add" %}">
         {% endif %}
-
     </form>
+    <table class="table">
+        <thead>
+            <th>{% trans 'Operation' %}</th>
+            <th>{% trans 'Balance before' %}</th>
+            <th>{% trans 'Balance after' %}</th>
+            <th>{% trans 'Operation time' %}</th>
+            <th>{% trans 'Description' %}</th>
+        </thead>
+        <tbody>
+        {% for operation in card_history %}
+            <tr>
+                <td>{{ operation.operation }}</td>
+                <td>{{ operation.balance_before }}</td>
+                <td>{{ operation.balance_after }}</td>
+                <td>{{ operation.date_time }}</td>
+                <td>{{ operation.description }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
 {% endblock %}

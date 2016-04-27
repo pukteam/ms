@@ -1,11 +1,12 @@
-from django.contrib.auth.decorators import login_required, user_passes_test
+from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse_lazy, reverse
 from django.db.models import Sum
-from django.shortcuts import redirect, render
+from django.shortcuts import redirect
 from django.views.generic import CreateView, UpdateView, TemplateView
 
-from representation.models import BankCard
+from representation.models import BankCard, CardHistory
 from .forms import BankCardForm
+from representation.views.mixin import LoginRequiredMixin, AdminRoleRequiredMixin
 
 
 def url_view():
@@ -13,16 +14,16 @@ def url_view():
 
     urlpatterns = [
         url(r'^add/$', BankCardAddFormView.as_view(), name='add'),
-        url(r'^edit/(?P<card_id>\d+)$', BankCardEditFormView.as_view(), name='edit'),
-        url(r'^delete$', delete_bank_card, name='delete'),
-        url(r'^blocked$', BankCardBlocked.as_view(), name='blocked'),
-        url(r'^total_balance$', BankCardTotalBalance.as_view(), name='total_balance'),
+        url(r'^edit/(?P<card_id>\d+)/$', BankCardEditFormView.as_view(), name='edit'),
+        url(r'^delete/$', delete_bank_card, name='delete'),
+        url(r'^blocked/$', BankCardBlocked.as_view(), name='blocked'),
+        url(r'^total_balance/$', BankCardTotalBalance.as_view(), name='total_balance'),
     ]
 
     return include(urlpatterns, namespace='card')
 
 
-class BankCardAddFormView(CreateView):
+class BaseBankCardView(LoginRequiredMixin):
     model = BankCard
     form_class = BankCardForm
     template_name = 'representation/addbankcard.html'
@@ -31,18 +32,21 @@ class BankCardAddFormView(CreateView):
         return reverse('representation:index')
 
 
-class BankCardEditFormView(UpdateView):
-    model = BankCard
-    form_class = BankCardForm
-    template_name = "representation/addbankcard.html"
+class BankCardAddFormView(BaseBankCardView, CreateView):
+    pass
 
+
+class BankCardEditFormView(BaseBankCardView, UpdateView):
     def get_object(self, queryset=None):
         model = self.model.objects.filter(id=self.kwargs['card_id'], was_deleted=False)
         if model.first():
             return model.first()
 
-    def get_success_url(self):
-        return reverse('representation:index')
+    def get_context_data(self, **kwargs):
+        context = super(BankCardEditFormView, self).get_context_data(**kwargs)
+
+        context["card_history"] = CardHistory.objects.filter(card_id=self.kwargs['card_id'])
+        return context
 
 
 @login_required(login_url=reverse_lazy('representation:auth:login'))
@@ -57,8 +61,7 @@ def delete_bank_card(request):
     return redirect(reverse('representation:index'))
 
 
-# @user_passes_test(lambda u: u.is_superuser)
-class BankCardBlocked(TemplateView):
+class BankCardBlocked(TemplateView, AdminRoleRequiredMixin):
     template_name = 'representation/blocked_cards.html'
 
     def get_context_data(self, **kwargs):
@@ -68,7 +71,7 @@ class BankCardBlocked(TemplateView):
         return context
 
 
-class BankCardTotalBalance(TemplateView):
+class BankCardTotalBalance(TemplateView, AdminRoleRequiredMixin):
     template_name = 'representation/total_balance.html'
 
     def get_context_data(self, **kwargs):
