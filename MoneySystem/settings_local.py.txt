@@ -126,6 +126,10 @@ USE_TZ = True
 STATIC_ROOT = os.path.join(PROJECT_ROOT, 'staticfiles')
 STATIC_URL = '/static/'
 
+
+STATICFILES_DIRS = ([os.path.join(BASE_DIR, "static")])
+
+
 # Extra places for collectstatic to find static files.
 STATICFILES_DIRS = (
     os.path.join(PROJECT_ROOT, 'static'),
@@ -135,14 +139,3 @@ STATICFILES_DIRS = (
 # https://warehouse.python.org/project/whitenoise/
 if PROD:
     STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
-
-ugettext = lambda s: s
-
-LANGUAGES = (
-    ('ru', ugettext(u'Russian')),
-    ('en', ugettext(u'English')),
-)
-
-LOCALE_PATHS = (
-    os.path.join(BASE_DIR, 'locale'),
-)

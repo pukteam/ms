@@ -1,4 +1,5 @@
 {% load staticfiles %}
+{% load i18n %}
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -16,40 +17,50 @@
 
   </head>
 
-  <body>
+<body>
 
     <nav class="navbar navbar-inverse navbar-fixed-top">
-      <div class="container">
-        <div class="navbar-header">
-          <a class="navbar-brand" href="{% url 'representation:index' %}">Money System</a>
+        <div class="container">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="{% url 'representation:index' %}">Money System</a>
+            </div>
+            <div id="navbar" class="collapse navbar-collapse">
+                {% if request.user.is_authenticated %}
+                <ul class="nav navbar-nav">
+                    <li><a href="{% url 'representation:index' %}">{% trans 'Bank cards' %}</a></li>
+                    <li><a href="{% url 'representation:investor:root' %}">{% trans 'Investors' %}</a></li>
+                    <li><a href="{% url 'representation:lang' %}">{% trans 'Lang' %}</a></li>
+                    <li><a href="{% url 'representation:auth:logout' %}">{% trans 'Logout' %}</a></li>
+                </ul>
+                {% endif %}
+            </div><!--/.nav-collapse -->
         </div>
-        <div id="navbar" class="collapse navbar-collapse">
-          {% if request.user.is_authenticated %}
-          <ul class="nav navbar-nav">
-            <li><a href="{% url 'representation:index' %}">карты</a></li>
-            <li><a href="{% url 'representation:investor' %}">вкладчики</a></li>
-            <li><a href="{% url 'representation:auth:logout' %}">выход</a></li>
-          </ul>
-          {% endif %}
-        </div><!--/.nav-collapse -->
-      </div>
     </nav>
 
     <div class="container main_content">
-        {% block content %}
+    {% block content %}
 
-        {% endblock %}
+    {% endblock %}
     </div><!-- /.container -->
 
     {% block style %}
 
     {% endblock %}
     <style>
-        body{
-{#            background-color: #f5f5f5;#}
-        }
-        .main_content{
-            margin-top: 75px;
+    body{
+    {#            background-color: #f5f5f5;#}
+    }
+    .main_content{
+    margin-top: 75px;
+    }
+
+        .sidebar {
+            bottom: 0;
+            left: 0;
+            display: block;
+            padding: 20px;
+            overflow-x: hidden;
+            overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
         }
 
     </style>
@@ -61,4 +72,4 @@
     <script src="{% static 'bootsrap/js/bootstrap.min.js' %}"></script>
     {% block script %}
     {% endblock %}
-  </body>
+</body>

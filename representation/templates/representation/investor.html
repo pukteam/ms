@@ -1,46 +1,47 @@
 {% extends 'representation/base.html' %}
+{% load i18n %}
 
 {% block title %}
-Вкладчики
+{% trans "Investors" %}
 {% endblock %}
 
 {% block content %}
     <div class="row">
         <div class="col-md-3 sidebar">
           <ul class="nav nav-pills nav-stacked">
-            <li class="active"><a href="{% url 'representation:investor' %}">Вкладчики</a></li>
-            <li><a href="{% url 'representation:addinvestor' %}">Добавить</a></li>
+            <li class="active"><a href="{% url 'representation:investor:root' %}">{% trans "Investors" %}</a></li>
+            <li><a href="{% url 'representation:investor:add' %}">{% trans "Add investor" %}</a></li>
           </ul>
         </div>
 
         <div class="col-md-9 content">
             <form method="get" style="margin-bottom: 10px">
                 <input name="search" type="text" style="width: 80%;" value="{{ search }}">
-                <input type="submit" value="поиск">
+                <input type="submit" value="{% trans "Search" %}">
             </form>
-            <label>Процент: </label>
+            <label>{% trans "Percent" %}: </label>
             <input type="text" name="percent">
-            <button name="percentButton">Рассчитать</button>
-            <form action="{% url 'representation:deleteinvestor' %}" method="post">
+            <button name="percentButton">{% trans "Calculate" %}</button>
+            <form action="{% url 'representation:investor:delete' %}" method="post">
                 {% csrf_token %}
                 <table class="table table-hover" style="border-left: 1px solid #eee">
                     <thead>
-                    <th>Фамилия</th>
-                    <th>Имя</th>
-                    <th>Отчество</th>
-                    <th>Сумма вклада</th>
-                    <th>Долг</th>
-                    <th>Удалить?</th>
+                    <th>{% trans "Last name" %}</th>
+                    <th>{% trans "First name" %}</th>
+                    <th>{% trans "Middle name" %}</th>
+                    <th>{% trans "Deposit amount" %}</th>
+                    <th>{% trans "Debt" %}</th>
+                    <th>{% trans "Delete" %}?</th>
                     </thead>
 
                         <tbody>
                             {% for investor in investors %}
                                 <tr>
-                                    <td><a href="{% url 'representation:editinvestor' investor.id %}">{{ investor.surname }}</a></td>
+                                    <td><a href="{% url 'representation:investor:edit' investor.id %}">{{ investor.surname }}</a></td>
                                     <td>{{ investor.name }}</td>
                                     <td>{{ investor.middle_name }}</td>
                                     <td name="sum">{{ investor.total }}</td>
-                                    <td name="dolg"></td>
+                                    <td name="commission"></td>
                                     <td><input type="checkbox" name="delete_{{ investor.id }}"></td>
                                 </tr>
                             {% endfor %}
@@ -58,13 +59,13 @@
 
 
             $("button[name='percentButton']").click(function(){
-                var a = $("td[name='dolg']");
+                var a = $("td[name='commission']");
                 var d = $("td[name='sum']");
                 var c = $("input[name='percent']");
                 var percent = parseFloat(c.val()) / 100;
                 for(var i = 0; i < d.length; i++){
                     var b = parseFloat(d[i].textContent);
-                    a[i].textContent = b - b * percent
+                    a[i].textContent = b * percent
                 }
             });
         })

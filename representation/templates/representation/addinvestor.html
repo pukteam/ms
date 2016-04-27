@@ -1,22 +1,23 @@
 {% extends 'representation/base.html' %}
+{% load i18n %}
 
 {% block title %}
-    Добавление вкладчика
+    {% trans "Add investor" %}
 {% endblock %}
 
 {% block content %}
     {% if form.instance.id%}
-        <form action="{% url 'representation:editinvestor' form.instance.id %}" method="post">
+        <form action="{% url 'representation:investor:edit' form.instance.id %}" method="post">
     {% else %}
-        <form action="{% url 'representation:addinvestor' %}" method="post">
+        <form action="{% url 'representation:investor:add' %}" method="post">
     {% endif %}
 
         {% csrf_token %}
         {{ form.as_p }}
         {% if form.instance.id %}
-            <input type="submit" value="Сохранить">
+            <input type="submit" value="{% trans "Save" %}">
         {% else %}
-            <input type="submit" value="Добавить">
+            <input type="submit" value="{% trans "Add" %}">
         {% endif %}
 
     </form>

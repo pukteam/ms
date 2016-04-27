@@ -1,76 +1,67 @@
 {% extends 'representation/base.html' %}
+{% load i18n %}
 
 {% block title %}
-Главная страница
+    {% trans 'Index page' %}
 {% endblock %}
 
 {% block content %}
     <div class="row">
         <div class="col-md-3 sidebar">
-          <ul class="nav nav-pills nav-stacked">
-            <li class="active"><a href="{% url 'representation:index' %}">Мои Карты</a></li>
-            <li><a href="{% url 'representation:card:add' %}">Добавить</a></li>
-          </ul>
+            <ul class="nav nav-pills nav-stacked">
+                <li class="active"><a href="{% url 'representation:index' %}">{% trans 'Bank cards' %}</a></li>
+                <li><a href="{% url 'representation:card:add' %}">{% trans 'Add bank card' %}</a></li>
+                <li><a href="{% url 'representation:card:blocked' %}">{% trans 'Blocked cards' %}</a></li>
+                <li><a href="{% url 'representation:card:total_balance' %}">{% trans 'Cards total balance' %}</a></li>
+            </ul>
         </div>
 
         <div class="col-md-9 content">
             <form method="get" style="margin-bottom: 10px">
                 <input name="search" type="text" style="width: 80%;" value="{{ search }}">
-                <input type="submit" value="поиск">
+                <input type="submit" value="{% trans 'Search' %}">
             </form>
             <form action="{% url 'representation:card:delete' %}" method="post">
                 {% csrf_token %}
                 <table class="table table-hover" style="border-left: 1px solid #eee">
                     <thead>
-                    <th>Банк</th>
-                    <th>Фамилия</th>
-                    <th>Имя</th>
-                    <th>Отчество</th>
-                    <th>Номер карты</th>
-                    <th>Пин</th>
-                    <th>Баланс</th>
-                    <th>Доступность</th>
-                    <th>Удалить?</th>
+                    <th>{% trans 'Bank' %}</th>
+                    <th>{% trans 'Last name' %}</th>
+                    <th>{% trans 'First name' %}</th>
+                    <th>{% trans 'Middle name' %}</th>
+                    <th>{% trans 'Number of card' %}</th>
+                    <th>{% trans 'PIN code' %}</th>
+                    <th>{% trans 'Balance' %}</th>
+                    <th>{% trans 'Availability' %}</th>
+                    <th>{% trans 'Delete?' %}</th>
                     </thead>
 
-                        <tbody>
-                            {% for bank_card in bank_cards %}
-                                <tr>
-                                    <td><a href="{% url 'representation:card:edit' bank_card.id %}">{{ bank_card.bank_name }}</a></td>
-                                    <td>{{ bank_card.surname }}</td>
-                                    <td>{{ bank_card.name }}</td>
-                                    <td>{{ bank_card.middle_name }}</td>
-                                    <td>{{ bank_card.number }}</td>
-                                    <td>{{ bank_card.pin_code }}</td>
-                                    <td>{{ bank_card.balance }}</td>
-                                    <td>
-                                        {% if bank_card.availability %}
-                                            Доступна
-                                        {% else %}
-                                            Не доступна
-                                        {% endif %}
-                                    </td>
-                                    <td><input type="checkbox" name="delete_{{ bank_card.id }}"></td>
-                                </tr>
-                            {% endfor %}
-                        </tbody>
+                    <tbody>
+                    {% for bank_card in bank_cards %}
+                        <tr>
+                            <td>
+                                <a href="{% url 'representation:card:edit' bank_card.id %}">{{ bank_card.bank_name }}</a>
+                            </td>
+                            <td>{{ bank_card.surname }}</td>
+                            <td>{{ bank_card.name }}</td>
+                            <td>{{ bank_card.middle_name }}</td>
+                            <td>{{ bank_card.number }}</td>
+                            <td>{{ bank_card.pin_code }}</td>
+                            <td>{{ bank_card.balance }}</td>
+                            <td>
+                                {% if bank_card.availability %}
+                                    {% trans 'Available' %}
+                                {% else %}
+                                    {% trans 'Not available' %}
+                                {% endif %}
+                            </td>
+                            <td><input type="checkbox" name="delete_{{ bank_card.id }}"></td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
                 </table>
-                <input type="submit" value="Удалить" class="col-md-offset-11">
+                <input type="submit" value="{% trans 'Delete' %}" class="col-md-offset-11">
             </form>
         </div>
     </div>
-{% endblock %}
-
-{% block style %}
-    <style>
-        .sidebar {
-            bottom: 0;
-            left: 0;
-            display: block;
-            padding: 20px;
-            overflow-x: hidden;
-            overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
-        }
-    </style>
-
 {% endblock %}
