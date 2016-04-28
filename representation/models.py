@@ -38,7 +38,8 @@ class BankCard(models.Model):
             for item in BankCard().__dict__:
                 if item not in ['_state', 'id', 'balance']:
                     if card.__dict__[item] != self.__dict__[item]:
-                        description += "-%s was changed from %s to %s " % (item, card.__dict__[item], self.__dict__[item])
+                        description += "-%s was changed from %s to %s " % (
+                        item, card.__dict__[item], self.__dict__[item])
             if description != "":
                 CardHistory(card=card, operation="Other", balance_before=card.balance, balance_after=self.balance,
                             description=description).save()
@@ -69,3 +70,7 @@ class CardHistory(models.Model):
     balance_after = models.IntegerField()
     date_time = models.DateTimeField(auto_now_add=True)
     description = models.TextField(blank=True)
+
+
+class TestModel(models.Model):
+    test = models.CharField(max_length=15)
