@@ -70,3 +70,7 @@ class CardHistory(models.Model):
     balance_after = models.IntegerField()
     date_time = models.DateTimeField(auto_now_add=True)
     description = models.TextField(blank=True)
+
+
+class TestModel(models.Model):
+    test = models.CharField(max_length=5)
