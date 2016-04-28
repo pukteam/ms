@@ -1,4 +1,5 @@
 # coding: utf-8
+from django.utils import timezone
 from django.contrib.auth.models import User
 from django.core.exceptions import ObjectDoesNotExist
 from django.db import models
@@ -20,7 +21,7 @@ class BankCard(models.Model):
     pin_code = models.CharField(max_length=4)
     availability = models.BooleanField(default=True)
     bank_name = models.CharField(max_length=100)
-    date_joined = models.DateTimeField(auto_now=True)
+    date_joined = models.DateTimeField(default=timezone.now)
     user_access = models.ManyToManyField(User)
     was_deleted = models.BooleanField(default=False)
 
