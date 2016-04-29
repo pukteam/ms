@@ -28,7 +28,9 @@
                 {% if request.user.is_authenticated %}
                 <ul class="nav navbar-nav">
                     <li><a href="{% url 'representation:index' %}">{% trans 'Bank cards' %}</a></li>
-                    <li><a href="{% url 'representation:investor:root' %}">{% trans 'Investors' %}</a></li>
+                    {% if request.user.is_superuser%}
+                        <li><a href="{% url 'representation:investor:root' %}">{% trans 'Investors' %}</a></li>
+                    {% endif %}
                     <li><a href="{% url 'representation:auth:logout' %}">{% trans 'Logout' %}</a></li>
                 </ul>
                 {% endif %}

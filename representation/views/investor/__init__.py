@@ -39,7 +39,10 @@ def investor_all(request):
     else:
         investors = Investor.objects.all()
     context['investors'] = investors
-    return render(request, 'representation/investor.html', context)
+    if request.user.is_superuser:
+        return render(request, 'representation/investor.html', context)
+    else:
+        return redirect(reverse('representation:index'))
 
 
 class BaseInvestorFormView(AdminRoleRequiredMixin):
