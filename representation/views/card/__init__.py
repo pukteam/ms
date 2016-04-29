@@ -67,7 +67,7 @@ class BankCardBlocked(TemplateView, AdminRoleRequiredMixin):
     def get_context_data(self, **kwargs):
         context = super(BankCardBlocked, self).get_context_data(**kwargs)
 
-        context["blocked_cards"] = BankCard.objects.filter(availability=False)
+        context["blocked_cards"] = BankCard.objects.filter(availability=False, was_deleted=False)
         return context
 
 
@@ -76,9 +76,9 @@ class BankCardTotalBalance(TemplateView, AdminRoleRequiredMixin):
 
     def get_context_data(self, **kwargs):
         context = super(BankCardTotalBalance, self).get_context_data(**kwargs)
-        bcb = BankCard.objects.filter(availability=False)\
+        bcb = BankCard.objects.filter(availability=False, was_deleted=False)\
             .aggregate(Sum('balance'))['balance__sum']
-        ucb = BankCard.objects.filter(availability=True)\
+        ucb = BankCard.objects.filter(availability=True, was_deleted=False)\
             .aggregate(Sum('balance'))['balance__sum']
         context["blocked_cards_balance"] = bcb if bcb else -1
         context["unblocked_cards_balance"] = ucb if ucb else -1
